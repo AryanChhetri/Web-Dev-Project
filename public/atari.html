@@ -1,0 +1,338 @@
+<html>
+    <head>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    </head>
+    <body>
+        <style>
+ #about{
+                position: absolute;
+                left: 1100;
+                top: 30;
+                height: 650;
+                width: 400;
+            }
+
+            #w1{
+                position: absolute;
+                left: 500;
+                top: 0;
+            }
+#w2{
+    position: absolute;
+    left: 850;
+    top: 0;
+}
+            #header{
+                position: absolute;
+                left: 680;
+                top: 0;
+            }
+            body{
+                background-color: cyan;
+            }
+            #atari{
+                position: absolute;
+                left: 450;
+                top: 100;
+            }
+            #imgg{
+                position: absolute;
+                left:20;
+                top: 30;
+                
+            }
+        </style>
+       
+       
+       <img src="https://c3.thejournal.ie/media/2015/04/atari-breakout-2.gif" style="position: absolute;top: 600;left: 70;height: 150;width: 300;" alt="">
+       
+       <div id="header">
+            <!-- <h2>ATARI BREAKOUT</h2> -->
+        </div>
+        
+        
+        <div id="w1"></div>
+        <div id="w2"></div>
+        <div id="about"></div>
+        <div id="imgg"></div>
+        <canvas id="atari" width="600" height="650"></canvas>
+        <canvas id="score" width="600" height="30"></canvas>
+    </body>
+    <script type="text/javascript">
+    
+    class block{
+        
+        constructor(x1,y1,x2,y2){
+            this.x1=x1;
+            this.y1=y1;
+            this.x2=x2;
+            this.y2=y2;
+            this.hit=0;
+        }
+    }
+    class balls{
+        constructor(x,y,velx,vely){
+            this.x=400;
+            this.y=300;
+            this.velx=300;
+            this.vely=300;
+        }
+    }
+    class player{
+        constructor(){
+            this.score=0;
+            this.x=250;
+            this.y=550;
+            this.lvl=1;
+        }
+    }
+    player1=new player();
+    blocks=new Array();
+    function blocks_create(level){
+        for(var j=0;j<level;j++)
+        for(var i=0;i<7;i++)
+        blocks.push(new block(5+85*i,5+30*(j+1),80,20));
+    }
+    let LastTime;
+    blocks_create(player1.lvl);
+    var ball=new balls();
+    
+    function callback(millis=0){
+                if (LastTime){
+                   
+                    update((millis-LastTime)/1000);
+
+                }
+                LastTime=millis;
+                requestAnimationFrame(callback);
+            }
+        function collide(player,ball){
+        if(player.x<=ball.x && player.x+125>=ball.x && player.y<ball.y)
+        ball.vely=-ball.vely;
+}            
+
+
+function collide1(block,ball){
+if(block.hit==0){    
+    if((block.x1<=ball.x)&&(block.x1+80>=ball.x)&&(ball.y>block.y1)&&(ball.y<=block.y1+20))
+    {
+        ball.vely=-ball.vely;
+        block.hit=1;
+    }
+    }
+        
+}       
+function reset(ball){
+    ball.x=300;
+    ball.y=300;
+    ball.velx=0;
+    ball.vely=0;
+}
+
+function start(){
+    ball.vely=300;
+    ball.velx=300;
+    ball.x=300;
+    ball.y=300;
+}
+var count=0;
+
+function update(dt){
+        count=0;
+        const canvas=document.getElementById("atari");
+        const other=document.getElementById("score");
+        ball.x+=ball.velx*dt;
+        ball.y+=ball.vely*dt;
+        if(ball.x<0|| ball.x>=canvas.width){
+            ball.velx=-ball.velx;
+        }
+        if(ball.y<0){
+            ball.vely=-ball.vely;
+        }
+
+        if(ball.y>canvas.width){
+            reset(ball);
+        }
+        
+        collide(player1,ball);
+        for(var i=0;i<7*player1.lvl;i++){
+        collide1(blocks[i],ball);
+
+        if(blocks[i].hit==1)
+          {  count+=1;
+            
+        }
+        }
+
+        if(count==7*player1.lvl){
+            for(var i=0;i<7*player1.lvl;i++){
+                blocks[i].hit=0;
+            }
+
+        for(var j=player1.lvl;j<player1.lvl+1;j++)
+        for(var i=0;i<7;i++)
+        blocks.push(new block(5+85*i,5+30*(j+1),80,20));
+
+            player1.lvl+=1;
+
+            reset(ball);
+            
+        }
+        
+        
+        const contx=other.getContext('2d');
+        const context=canvas.getContext('2d');
+        context.fillStyle="#000";
+        context.fillRect(0,0,canvas.width,canvas.height);
+        context.fillStyle="#fff";
+        context.fillRect(player1.x,player1.y,125,20);
+        for(var i=0;i<7*player1.lvl;i++){
+            if(blocks[i].hit==0){
+            context.fillRect(blocks[i].x1,blocks[i].y1,blocks[i].x2,blocks[i].y2);
+        }}
+        
+        canvas.addEventListener('mousemove',event => player1.x=event.offsetX);
+        canvas.addEventListener('click',event=>start());
+        context.fillRect(ball.x,ball.y,10,10);
+        context.font="15px Arial";
+        context.fillText("-----------------------------------------------------------------------------------------------------------------------------------------",0,600);
+        context.fillText("Player level ="+player1.lvl,250,620);
+       
+        }
+                
+        callback();
+
+</script>
+<script type="text/babel">
+class About extends React.Component{                                                 
+    render(){
+        var cardstyle={
+          
+            height:650,
+            width:400,
+            
+            backgroundColor:"#b903d8",
+            filter:"drop-shadow(0px 0px 5px #666)",
+            WebkitFilter:"drop-shadow(0px 0px 5px #666)"
+
+            };
+            var pstyle={
+                color:"#fff",
+                margin:20,
+                padding:20,
+                fontSize:20,
+            };
+        return(
+            <div style={cardstyle}>
+            <p style={pstyle}>{this.props.con}</p>
+            
+            <p style={pstyle}>{this.props.con2}</p>
+            </div>
+        );
+
+    }
+}
+
+class IMG extends React.Component{
+            render(){
+                var cardstyle={
+                    height:700,
+                    width:250,
+                    padding:0,
+                    filter:"drop-shadow(0px 0px 5px #666)",
+                    WebkitFilter:"drop-shadow(0px 0px 5px #666)"
+                };
+              var styles={
+                  width:400
+              }
+                return(
+                    <div style={cardstyle}>
+                    <img style={styles} src="https://lh3.googleusercontent.com/E6j8LOcumm7j-YQ548atMf0DmtGObZgmTn9d3HEOTCHe3gzdqNhnM1XyyAxIl3U=s1200" alt=""></img>
+                    </div>
+                );
+
+            }
+        }
+
+        var colorlist=["#120078","#fd3a69","#fecd1a","#9d0191","#30475e","#f05454"];
+        
+
+        class Words extends React.Component{
+            
+            constructor(props){
+                super(props);
+                this.state={fontSize:20,
+                    fontFamily:"sans-serif",
+                    color:"#120078",
+                    }
+            }
+            componentDidMount(){
+                setInterval(()=>{
+                    this.cchange();
+                },1000);
+            }
+
+            cchange(){
+                var j=0;
+                for(var i=0;i<6;i++){
+                if(colorlist[i]===this.state.color){
+                    j=i;
+                    if(j==3)
+                 {   j=0;}
+                    else{
+                        j=j+1;
+                    }
+                }
+            }
+                console.log(j);
+           
+                this.setState({
+                    color:colorlist[j]
+                });
+            }
+            
+            
+            render(){
+                var hstyle={
+                 color:this.state.color,
+                 padding:10,
+                };
+                return(
+                    <div ><h1 style={hstyle}>{this.props.he}</h1></div>
+                );
+            }
+        }
+
+
+        ReactDOM.render(
+            <Words he="ATARI"/>,
+            document.getElementById("w1")
+        );
+
+
+        ReactDOM.render(
+            <Words he="BREAKOUT"/>,
+            document.getElementById("w2")
+        );
+
+ReactDOM.render(
+    <IMG/>,
+    document.getElementById("imgg")
+)
+
+ReactDOM.render(
+    <About con2="Atari released several sequels to Pong that built upon the original's gameplay by adding new features." con="Breakout is an arcade game developed and published by Atari, Inc.,[3] and released on May 13, 1976.[4] It was conceptualized by Nolan Bushnell and Steve Bristow, influenced by the seminal 1972 Atari arcade game Pong, and built by Steve Wozniak.
+
+Breakout was the basis and inspiration for certain aspects of the Apple II personal computer. In 1978, the game was ported to the Atari 2600 and a sequel was made, Super Breakout, which four years later became the pack-in game for the Atari 5200 console. Breakout spawned an entire genre of Breakout clones, and the concept found new legs with Taito's 1986 Arkanoid, which itself spawned dozens of imitators."/>,
+    document.getElementById("about")
+);
+
+ReactDOM.render(
+    <img src="https://i.pinimg.com/originals/17/98/75/179875678360aeaa3f0fc35db255f5d9.jpg" height="90" width="140" alt="" ></img>,
+    document.getElementById("header")
+);
+</script>
+</html>

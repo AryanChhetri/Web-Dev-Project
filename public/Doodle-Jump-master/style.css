@@ -1,0 +1,59 @@
+.grid {
+  width: 400px;
+  height: 800px;
+  background-image: url('forest.jpeg');
+  
+  position: relative;
+  font-size: 100px;
+  text-align: center;
+  margin-left: 35%;
+  margin-top: 50px;
+}
+*{
+  background-color: lightblue;
+}
+
+.doodler {
+  width: 60px;
+  height: 85px;
+  background-image: url('ma.png');
+  position: absolute;
+}
+
+.platform {
+  width: 85px;
+  height: 15px;
+  background-image: url('cloud.jpeg');
+  position: absolute;
+}
+
+.footer{
+  margin-top: 100px;
+  color: white;
+  background-color: darkred;
+  
+}
+.bottom_left > ul {
+  color: grey;
+}
+.bottom_left > h3 {
+  color: grey;
+}
+.address {
+  color: grey;
+  border-left: 70%;
+  margin-left: 60%;
+  margin-top: 1%;
+}
+.bottom {
+  display: flex;
+  background-color: black;
+}
+.down {
+  display: flex;
+  align-items: center;
+  
+}
+.im{
+  padding-left: 50px;
+}

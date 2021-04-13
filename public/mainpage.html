@@ -1,0 +1,301 @@
+<html>
+    <head>
+        <title>Main Page</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+              
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    </head>
+    <body>
+      <style>
+ #ender{
+                position: absolute;
+                top: 900;
+                left: 5;
+            }
+
+
+ body::-webkit-scrollbar{
+                    width: 0.25rem;
+                    height: 1.5rem;
+                }
+                body::-webkit-scrollbar-track{
+                    background:#1e1e24 ;
+                }
+                body::-webkit-scrollbar-thumb{
+                    background: blueviolet;
+                }
+
+
+        #pong{
+                position: absolute;
+                left: 150;
+                top: 150;
+                transition: 0.2s;
+                
+            }
+            #pong:hover{
+                transform: scale(1.1);}
+            #atari{
+                position: absolute;
+                left: 600;
+                top: 150;
+                transition: 0.2s;
+            }
+            #atari:hover{
+                transform: scale(1.1);}
+            #flappyb{
+                position: absolute;
+                left: 1050;
+                top: 150;
+                transition: 0.2s;
+            }
+            #flappyb:hover{
+                transform: scale(1.1);}
+
+
+            #pong1{
+                position: absolute;
+                left: 150;
+                top: 550;
+                transition: 0.2s;
+            }
+            #pong1:hover{
+                transform: scale(1.1);}
+            #atari2{
+                position: absolute;
+                left: 600;
+                top: 550;
+                transition: 0.2s;
+            }
+            #atari2:hover{
+                transform: scale(1.1);}
+            #flappyb3{
+                position: absolute;
+                left: 1050;
+                top: 550;
+                transition: 0.2s;
+            } 
+            #flappyb3:hover{
+                transform: scale(1.1);}
+       
+       
+       
+       
+        body{
+          background-color: cyan;
+        }
+        .navbar-custom{
+          
+          background-color: black;
+          position: sticky;
+          top: 0;
+          bottom: 10;
+          width: 1600;
+        }
+        ul{
+          margin: 0;
+          padding: 0;
+          list-style: none;
+        }
+        ul li{
+          float: left;
+          width: 150;
+          text-align: center;
+        }
+        #logoimg{
+          position: absolute;
+          left: 100;
+          top: 10;
+        }
+        ul li li{
+          text-decoration: none;
+          color: white;
+          font-size: 20;
+          display: block;
+        }
+
+        ul li li:hover{
+          background-color: green;
+        }
+        ul li ul li{
+          display: none;
+        }
+        ul li:hover ul li{
+          display: block;
+          background-color: gray;
+          opacity: 0.9  ;
+        }
+        #ug{
+          position: absolute;
+          left: 1000;
+          top: 20;
+        }
+        header{
+          width: 100%;
+          height: 70;
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          background-color: black;
+        }
+        #profile{
+          position: absolute;
+          left: 315;
+          top: 0;
+        }
+        #contact{
+          position: absolute;
+          top: 0;
+          left: 200;
+        }
+        #ftg{
+          height: 70;
+          width: 600;
+          position: absolute;
+          left: 250;
+          top: 0;
+        }
+        #pic{
+          height: 70;
+          width: 60;
+          position: absolute;
+          top: 0;
+          left: 900;
+        }
+      </style>
+
+<header>
+   
+      <a href=" C:\Users\Aryan\AndroidStudioProjects\magic_ball\images\rg.png" title="About"> <img id="logoimg" src="game.jpeg" height="50" alt=""></a>
+    
+</header>
+
+<img src="https://www.dafont.com/forum/attach/orig/4/5/455741.jpg" id="ftg" alt="">
+<img src="https://i.pinimg.com/originals/1b/f0/f4/1bf0f46f79bb28466bfcb4d9c4663aba.gif" id="pic" alt="">
+<ul id="ug">
+  <button type="button" class="btn btn-secondary">
+  <li id="Upcoming" >
+   <a href="" style="font-size: 20;color: white;">UpcomingGames</a>
+   <ul>
+     <a href=""><li>Donkey Kong</li></a>
+     <a href=""><li>Tetris</li></a>
+     <a href=""><li>Space Fighters</li></a>
+   </ul>     
+</li>
+</button>
+<li id="profile" ><button type="button"  class="btn btn-secondary"><a href="" style="color: white;font-size: 20;">Profile</a> </button></li>
+<li id="contact" ><button type="button"  class="btn btn-secondary"><a href="" style="color: white;font-size: 20;">Contact</a> </button></li>
+</ul>  
+
+
+<div id="MainPage"></div>
+<div id="ender"></div>
+<script type="text/babel">
+
+class Square extends React.Component{
+    render(){
+        var Squarestyle={
+                height:250,
+                width:300,    
+                
+        };
+        return(
+            
+            <img style={Squarestyle} src={this.props.srcc} alt=""/>
+            
+        );
+    }
+}
+
+
+class Label extends React.Component{
+    render(){
+        var LabelStyle={
+            fontFamily:"sans-serif",
+            fontSize:"bold",
+            color:	"#000000",
+            padding:15,
+            margin:0,
+            align:"centre",
+        };
+        return(
+            <p style={LabelStyle}>{this.props.label}</p>
+        );
+    }
+}
+
+
+class Card extends React.Component{
+    render(){
+        var cardstyle={
+          
+            height:300,
+            width:300,
+            padding:0,
+            backgroundColor:"#fff",
+            filter:"drop-shadow(0px 0px 5px #666)",
+            WebkitFilter:"drop-shadow(0px 0px 5px #666)"
+        };
+        return(
+            <div style={cardstyle}><Square srcc={this.props.srcc}/><Label label={this.props.label}/></div>
+        );
+
+    }
+}
+
+
+
+
+ReactDOM.render(
+    <div>
+<a id="pong" href="pong.html"><Card srcc="https://i.pinimg.com/originals/22/b9/5b/22b95b8dce68029aac8ff1bf46959fa6.gif" label="Pong"></Card></a>
+<a id="atari" href="atari.html"><Card srcc="https://c3.thejournal.ie/media/2015/04/atari-breakout-2.gif" label="Atari-Breakout"></Card></a>
+<a id="flappyb" href="./flappy-bird-master/index.html"><Card srcc="https://media3.giphy.com/media/euuaA2cwLEUuI/giphy.gif" label="Flappy Bird"></Card></a>
+<a id="pong1" href="./Doodle-Jump-master/index.html"><Card srcc="https://media.giphy.com/media/crBFPTqW4U2YM/giphy.gif" label="Doodle-Jump-master"></Card></a>
+<a id="atari2" href="./rockpaper/index.html"><Card srcc="https://media.giphy.com/media/l49JLqDArrAoVy4wM/giphy.gif" label="rockpaper"></Card></a>
+<a id="flappyb3" href=""><Card srcc="https://media3.giphy.com/media/euuaA2cwLEUuI/giphy.gif" label="Flappy Bird"></Card></a>
+    </div>,
+    document.getElementById("MainPage")
+);
+class Ender extends React.Component{
+                render(){var div_styles={
+                    backgroundColor:"#990099",
+                    height:200,
+                    width:1520
+                };
+
+                var p_styles={
+                    fontFamily:"sans-serif",
+                    fontSize:25,
+                    color:"#fff",
+                    padding:25,
+                    
+                };
+
+                 return(
+                            <div style={div_styles}>
+                            <p style={p_styles}>This site has been created and deployed by the students of PES University.More retro games are scheduled to be releasing soon this month!!!<br/>Your patience is greatly appreciated and our team is working very hard to get these games to you as soon as possible!<br/>Stay tuned!!</p>
+                            </div>
+                    );
+                }
+            }
+         ReactDOM.render(
+                <Ender/>,
+                document.getElementById("ender")
+            );
+
+
+
+</script>
+
+
+
+
+
+
+    </body>
+   
+</html>
